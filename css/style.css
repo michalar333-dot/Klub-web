@@ -1,0 +1,47 @@
+/* Next Generation Legal Business Club – základní styly
+   Barvy: #1E366D (tmavě modrá), #7D91C2 (světle modrá)
+   Písmo: Cormorant Garamond (nadpisy), Inter (text) */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #F5F6F9; }
+a { color: #1E366D; }
+a:hover { color: #3A5590; }
+img { max-width: 100%; }
+section[id] { scroll-margin-top: 80px; }
+
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #7D91C2;
+  outline-offset: 2px;
+}
+
+/* Úvodní animace s logem (jen se zapnutým JavaScriptem) */
+#intro { display: none; }
+.js #intro {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  background-color: rgba(30, 54, 109, 1);
+  transition: background-color .9s cubic-bezier(.65,0,.35,1);
+}
+#intro-logo {
+  display: block; height: auto; width: min(72vw, 600px);
+  transform-origin: center center;
+  transition: transform 1s cubic-bezier(.65,0,.35,1);
+}
+.js #header-logo { opacity: 0; }
+.js.intro-moving #intro { background-color: rgba(30, 54, 109, 0); pointer-events: none; }
+.js.intro-done #intro { display: none; }
+.js.intro-done #header-logo { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js #intro { display: none; }
+  .js #header-logo { opacity: 1; }
+}
+
+[hidden] { display: none !important; }
+
+/* Na mobilu nenecháváme hlavičku přilepenou – menu se zalamuje a zabíralo by půl obrazovky */
+@media (max-width: 640px) {
+  header { position: static !important; }
+}
